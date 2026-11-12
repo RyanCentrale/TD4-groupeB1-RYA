@@ -16,6 +16,23 @@ def parcours_DFS(cartons, cible) :
     # cible : entier 
     nb_noeuds = 0
     meilleure_expression = []
+    pile = Pile()
+    etat_initial = ([],cartons)
+    pile.empiler(etat_initial)
+    while not pile.est_vide() :
+        (expression_partielle,cartons_restants)=p.depiler()
+        nb_noeuds += 1
+
+        valideOuNon, valeurOuNone = eval_NPI_liste(expression_partielle)
+        
+        if valideOuNon:
+            if valeurOuNone is not None:
+                ecart = abs(cible - valeurOuNone)
+                if ecart < meilleur_ecart:
+                    meilleur_ecart = ecart
+                    meilleure_expression = expression_partielle                    
+                    if ecart == 0:
+                        break
     
     return meilleure_expression, nb_noeuds
 
