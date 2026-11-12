@@ -33,6 +33,17 @@ def parcours_DFS(cartons, cible) :
                     meilleure_expression = expression_partielle                    
                     if ecart == 0:
                         break
+        
+        # Option A : Piocher un nouveau carton
+        for i in range(len(cartons_restants)):
+            nouvelle_expression = expression_partielle + [cartons_restants[i]]
+            nouveaux_restants = cartons_restants[:i] + cartons_restants[i+1:]
+            p.empiler((nouvelle_exppression, nouveaux_restants))
+            
+        # Option B : Appliquer un opérateur
+        for operateur in ['+', '-', '*', '/']:
+            nouvelle_expression = expression_partielle + [operateur]
+            p.empiler((nouvelle_expression, cartons_restants))
     
     return meilleure_expression, nb_noeuds
 
